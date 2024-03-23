@@ -1,4 +1,4 @@
-# pup3 install anthropic
+# pip3 install anthropic[vertex]
 # CLAUDE_API_KEY env var also required. https://console.anthropic.com/
 
 import anthropic
