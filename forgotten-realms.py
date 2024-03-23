@@ -1,5 +1,14 @@
-# pip3 install anthropic[vertex]
+# pip3 install anthropic
 # CLAUDE_API_KEY env var also required. https://console.anthropic.com/
+# usage: forgotten-realms.py [-h] [--model MODEL] [--api API] [--language LANGUAGE]
+
+# Process files in specified folders.
+
+# options:
+#   -h, --help           show this help message and exit
+#   --model MODEL        Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")
+#   --api API            API to use: "anthropic" or "google" (default: "anthropic")
+#   --language LANGUAGE  Language for the narrator: for example "українська", or "Ukrainian"
 
 import anthropic
 import argparse
@@ -24,11 +33,12 @@ def clear_input():
 
 
 class RPGGame:
-    def __init__(self, client, model):
+    def __init__(self, client, model, language="English"):
         self.client = client
         self.model = model
         self.context = "Chatacter posesses 58 coins and usual folk robes. His skills are yet to be discovered."
         self.history_message_num = 0
+        self.language = language
         # self.total_usage = 0
 
 
@@ -81,7 +91,7 @@ class RPGGame:
         self.context = context
 
     def play(self):
-        narrator_system_message = """You are an AI narrator for an RPG game set in Forgotten Realms.
+        narrator_system_message = f"""You are an AI narrator for an RPG game set in Forgotten Realms.
 Describe the game world, suggest some possible actions (user should know he can write his own alternative), and request input for player's next action.
 Try to write your output with less than 130 words. Provide clues to help us map out our surroundings.
 We never simulate <Player Input/> - that's up only for the player to decide.
@@ -100,7 +110,7 @@ Tavern Keeper:
 "Welcome traveler! What brings you to my tavern? Perhaps I can help."
 </Example narration>
 Only output narration, nothing more. End output when narration ends, right before </Narration> tag.
-Говори українською."""
+Speak {self.language} language."""
 
         context_maker_system_message = """You are an AI context rememberer for an RPG game. Keep track in ENGLISH language.
 Update and maintain the game context based on the narrator's output and the player's input, keeping the output context within 900 words.
@@ -154,8 +164,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process files in specified folders.')
     parser.add_argument('--model', type=str, help='Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")', default='sonnet')
     parser.add_argument('--api', type=str, help='API to use: "anthropic" or "google" (default: "anthropic")', default='anthropic')
+    parser.add_argument('--language', type=str, help='Language for the narrator: for example "українська", or "Ukrainian"', default='English')
     args = parser.parse_args()
-
     api_key = os.environ.get('CLAUDE_API_KEY')
     if not api_key:
         raise ValueError('CLAUDE_API_KEY environment variable is not set.')
@@ -173,5 +183,5 @@ if __name__ == "__main__":
     else:
         raise ValueError(f"Invalid API: {args.api}. Only 'anthropic' is supported.")
 
-    game = RPGGame(client, model)
+    game = RPGGame(client, model, args.language)
     game.play()
