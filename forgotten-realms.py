@@ -48,7 +48,7 @@ class RPGGame:
         # print(colored("+       +","yellow"), end="", flush=True)
         with self.client.messages.stream(
             model=self.model,
-            max_tokens=400,
+            max_tokens=600,
             temperature=0.7,
             system=system_message + " Context: " + self.context,
             messages=[
@@ -111,12 +111,14 @@ Tavern Keeper:
 "Welcome traveler! 🤗 What brings you to my tavern? Drink 🍺 and 🗣 talk?"
 </Example narration>
 Only output narration, nothing more. End output when narration ends, right before </Narration> tag.
+When my speech is presented, please, also present an answer from someone I talk to, or Universe. Try to be dense in action.
+Narration ends on a note that requires further player input.
 Speak {self.language} language."""
 
         context_maker_system_message = """You are an AI context rememberer for an RPG game. Keep track in ENGLISH language.
 Update and maintain the game context based on the narrator's output and the player's input, keeping the output context within 900 words.
 Consider to store short and long term memory, what is needed and what to discard. You must keep in memory all of the important facts about setting and character, for us to be able to fully deconstruct current situation, location and the world, intents, etc. and all important historical events. Be short and concise, but keep track of anything of importance, even if it's not relevant at the moment. Clearly remember the player's previous request and what we're up to right now. You don't do \"Narration:\", you only output context! When buying or anyone is set to be performing any actions, you have to consider if we can afford it and if we are able to perform actions successfully, or if an action is to be denied.
-STRUCTURE and REMEMBER CONTEXT, update location, posessions, relationship info, keep track of previous important actions by all characters and possible options, discard now-unimportant details, etc. You can make an <ANALYSIS/>, but not narrate new things.
+STRUCTURE and REMEMBER CONTEXT, update location, posessions, relationship info, keep track of previous actions by all characters and possible options, discard now-unimportant details, etc. You can make an <ANALYSIS/>, but not narrate new things.
 Don't narrate. Don't provide next step information. Only provide context up to the point of player's action and it's validity.
 Monospaced font is used. Count all of the characters carefully.
 DON'T ADVANCE CONVERSATIONS AND PRODUCE CONSEQUENCES! Anything said will not be seen by the player.
