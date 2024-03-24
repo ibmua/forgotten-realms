@@ -3,8 +3,6 @@
 # export CLAUDE_API_KEY="sk-ant-api03-.."
 # usage: world-simulator.py [-h] [--world "world setting"] [--model MODEL] [--api API] [--language LANGUAGE]
 
-# Process files in specified folders.
-
 # options:
 #   -h, --help           show this help message and exit
 #   --model MODEL        Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")
@@ -37,8 +35,7 @@ class RPGGame:
     def __init__(self, client, model, language, world):
         self.client = client
         self.model = model
-        # self.context = "Character posesses 58 coins and usual folk robes. His skills are yet to be discovered."
-        self.context = "Character posessions and skills are designed based on setting appropriately."
+        self.context = "Character posessions and skills are designed appropriate to setting."
         self.history_message_num = 0
         self.language = language
         self.world = world
@@ -89,8 +86,6 @@ class RPGGame:
         print()
         print()
 
-            # self.total_usage += stream.usage["prompt_tokens"] + stream.usage["completion_tokens"]
-            # self.context = context[:1500]  # Truncate context to 1500 tokens
         self.context = context
 
     def play(self):
@@ -137,20 +132,13 @@ At the end we list players past action."""
         print(colored("Welcome to the AI-powered RPG game!", "cyan"))
         user_input = "Lets explore the Realm!"
         while True:
-            # narration = self.narrator(narrator_system_message, "")
-            # print(colored(f"\nNarrator: {narration}", yellow))
             
             narration = self.narrator(narrator_system_message, user_input)
-            # print(f"\nNarrator: {narration}")
             sys.stdin.flush()
 
             timer = threading.Timer(0.5, clear_input)
             timer.start()
 
-            # Wait for user input
-            # user_input = sys.stdin.readline().strip()
-
-            # Cancel the timer if the user responds within 0.5 seconds
             time.sleep(1)
             timer.cancel()
 
@@ -163,11 +151,6 @@ At the end we list players past action."""
             print()
             print()
             self.context_maker(context_maker_system_message, narration, user_input)
-            # print(colored(f"\nTotal tokens used: {self.total_usage}", "red"))
-            
-            # choice = input(colored("Continue playing? (y/n): ", "magenta"))
-            # if choice.lower() != 'y':
-            #     break
         print("Thanks for playing!")
 
 if __name__ == "__main__":
