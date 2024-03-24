@@ -49,7 +49,7 @@ class RPGGame:
         with self.client.messages.stream(
             model=self.model,
             max_tokens=400,
-            temperature=0.5,
+            temperature=0.7,
             system=system_message + " Context: " + self.context,
             messages=[
                     {"role": "user", "content": user_input + " This is interaction number " + str(self.history_message_num) + " with player."}
@@ -95,9 +95,10 @@ class RPGGame:
 Describe the game world, suggest some possible actions (user should know he can write his own alternative), and request input for player's next action.
 Try to write your output with less than 130 words. Provide clues to help us map out our surroundings.
 We never simulate <Player Input/> - that's up only for the player to decide.
-We always paint characters we talk to in carefully crafted 15x10 ASCII art, if we're talking to somebody. When you can, use emojis instead of words.
+We always paint characters we talk to in carefully crafted 15x10 ASCII art, if we're talking to somebody. 
+Max out use of emojis to support words.
 <Example narration>
-You enter the Tavern, hoping to find someone generous to talk to.
+You enter the Tavern 🍻, hoping to find someone generous to talk to.
 
 Tavern Keeper:
      ___
@@ -107,7 +108,7 @@ Tavern Keeper:
   /\\_____/\
  |_________|
 
-"Welcome traveler! What brings you to my tavern? 🍺 and talk?"
+"Welcome traveler! 🤗 What brings you to my tavern? Drink 🍺 and 🗣 talk?"
 </Example narration>
 Only output narration, nothing more. End output when narration ends, right before </Narration> tag.
 Speak {self.language} language."""
@@ -115,7 +116,7 @@ Speak {self.language} language."""
         context_maker_system_message = """You are an AI context rememberer for an RPG game. Keep track in ENGLISH language.
 Update and maintain the game context based on the narrator's output and the player's input, keeping the output context within 900 words.
 Consider to store short and long term memory, what is needed and what to discard. You must keep in memory all of the important facts about setting and character, for us to be able to fully deconstruct current situation, location and the world, intents, etc. and all important historical events. Be short and concise, but keep track of anything of importance, even if it's not relevant at the moment. Clearly remember the player's previous request and what we're up to right now. You don't do \"Narration:\", you only output context! When buying or anyone is set to be performing any actions, you have to consider if we can afford it and if we are able to perform actions successfully, or if an action is to be denied.
-STRUCTURE and REMEMBER CONTEXT, update location, posessions, relationship info, keep track of previous actions and options, discard unimportant details, etc. You can make an <ANALYSIS/>, but not narrate new things.
+STRUCTURE and REMEMBER CONTEXT, update location, posessions, relationship info, keep track of previous actions by all characters and possible options, discard unimportant details, etc. You can make an <ANALYSIS/>, but not narrate new things.
 Don't narrate. Don't provide next step information. Only provide context up to the point of player's action and it's validity.
 Monospaced font is used. Count all of the characters carefully.
 DON'T ADVANCE CONVERSATIONS AND PRODUCE CONSEQUENCES! Anything said will not be seen by the player.
