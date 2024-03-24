@@ -33,12 +33,13 @@ def clear_input():
 
 
 class RPGGame:
-    def __init__(self, client, model, language="English"):
+    def __init__(self, client, model, language, world):
         self.client = client
         self.model = model
         self.context = "Chatacter posesses 58 coins and usual folk robes. His skills are yet to be discovered."
         self.history_message_num = 0
         self.language = language
+        self.world = world
         # self.total_usage = 0
 
 
@@ -91,7 +92,7 @@ class RPGGame:
         self.context = context
 
     def play(self):
-        narrator_system_message = f"""You are an AI Dungeon Master / narrator for an RPG game set in Forgotten Realms.
+        narrator_system_message = f"""You are an AI Dungeon Master / narrator for an RPG game set in {self.world}.
 Describe the game world, suggest some possible actions (user should know he can write his own alternative), and request input for player's next action.
 Try to write your output with less than 130 words. Provide clues to help us map out our surroundings.
 We never simulate <Player Input/> - that's up only for the player to decide.
@@ -126,7 +127,9 @@ Something more or less important happens on every step, this world never goes st
 Map out and update a JSON of places inside the world and their hierarchies, what's inside what, as well as a short description of notable features. 
 We also put items of characters, their state and their properties inside character's props of world map JSON. It also contains info on character relationships with the protagonist and other important characters.
 Maintain and keep up to date assumed positions of characters and their properties inside the map. Keep clear track of time and remember hour, minute, day of week, day of month, etc.
-Retain memories of quests completed and of promises and compensations not unfulfilled yet."""
+Retain memories of quests completed and of promises and compensations not unfulfilled yet.
+Don't forget to list each thing you got to list in JSON.
+At the end we list players past action."""
         
         # print("Welcome to the AI-powered RPG game!")
         print(colored("Welcome to the AI-powered RPG game!", "cyan"))
@@ -170,6 +173,7 @@ if __name__ == "__main__":
     parser.add_argument('--model', type=str, help='Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")', default='sonnet')
     parser.add_argument('--api', type=str, help='API to use: "anthropic" or "google" (default: "anthropic")', default='anthropic')
     parser.add_argument('--language', type=str, help='Language for the narrator: for example "українська", or "Ukrainian"', default='English')
+    parser.add_argument('--world', type=str, help='World this is set in. defaults to "Forgotten Realms". Try, for example, "world of Harry Potter", etc.', default='Forgotten Realms')
     args = parser.parse_args()
     api_key = os.environ.get('CLAUDE_API_KEY')
     if not api_key:
@@ -188,5 +192,5 @@ if __name__ == "__main__":
     else:
         raise ValueError(f"Invalid API: {args.api}. Only 'anthropic' is supported.")
 
-    game = RPGGame(client, model, args.language)
+    game = RPGGame(client, model, args.language, args.world)
     game.play()
