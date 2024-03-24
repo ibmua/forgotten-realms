@@ -95,7 +95,7 @@ class RPGGame:
 Describe the game world, suggest some possible actions (user should know he can write his own alternative), and request input for player's next action.
 Try to write your output with less than 130 words. Provide clues to help us map out our surroundings.
 We never simulate <Player Input/> - that's up only for the player to decide.
-We always paint characters we talk to in carefully crafted 15x10 ASCII art, if we're talking to somebody.
+We always paint characters we talk to in carefully crafted 15x10 ASCII art, if we're talking to somebody. When you can, use emojis instead of words.
 <Example narration>
 You enter the Tavern, hoping to find someone generous to talk to.
 
@@ -107,7 +107,7 @@ Tavern Keeper:
   /\\_____/\
  |_________|
 
-"Welcome traveler! What brings you to my tavern? Perhaps I can help."
+"Welcome traveler! What brings you to my tavern? 🍺 and talk?"
 </Example narration>
 Only output narration, nothing more. End output when narration ends, right before </Narration> tag.
 Speak {self.language} language."""
