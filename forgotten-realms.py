@@ -174,7 +174,7 @@ if __name__ == "__main__":
     parser.add_argument('--model', type=str, help='Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")', default='sonnet')
     parser.add_argument('--api', type=str, help='API to use: "anthropic" or "google" (default: "anthropic")', default='anthropic')
     parser.add_argument('--language', type=str, help='Language for the narrator: for example "українська", or "Ukrainian"', default='English')
-    parser.add_argument('--world', type=str, help='World this is set in. defaults to "Forgotten Realms". Try, for example, "world of Harry Potter", "Ancient Greece", "Soviet Union under Stalin", etc.', default='Forgotten Realms')
+    parser.add_argument('--world', type=str, help='World this is set in. defaults to "Forgotten Realms". Try, for example, "world of Harry Potter", "Ancient Greece", "Ukraine fighting Russia. I\'m Zelensky", "3 reich during WW2. I am Hitler", etc.', default='Forgotten Realms')
     args = parser.parse_args()
     api_key = os.environ.get('CLAUDE_API_KEY')
     if not api_key:
