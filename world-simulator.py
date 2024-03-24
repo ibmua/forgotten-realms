@@ -1,6 +1,6 @@
 # pip3 install anthropic
 # CLAUDE_API_KEY env var also required. https://console.anthropic.com/
-# usage: forgotten-realms.py [-h] [--world "world setting"] [--model MODEL] [--api API] [--language LANGUAGE]
+# usage: world-simulator.py [-h] [--world "world setting"] [--model MODEL] [--api API] [--language LANGUAGE]
 
 # Process files in specified folders.
 
