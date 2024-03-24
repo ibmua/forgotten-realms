@@ -91,7 +91,7 @@ class RPGGame:
         self.context = context
 
     def play(self):
-        narrator_system_message = f"""You are an AI narrator for an RPG game set in Forgotten Realms.
+        narrator_system_message = f"""You are an AI Dungeon Master / narrator for an RPG game set in Forgotten Realms.
 Describe the game world, suggest some possible actions (user should know he can write his own alternative), and request input for player's next action.
 Try to write your output with less than 130 words. Provide clues to help us map out our surroundings.
 We never simulate <Player Input/> - that's up only for the player to decide.
