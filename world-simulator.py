@@ -1,4 +1,4 @@
-# pip3 install anthropic
+# pip3 install anthropic termcolor
 # CLAUDE_API_KEY env var also required. https://console.anthropic.com/
 # export CLAUDE_API_KEY="sk-ant-api03-.."
 # usage: world-simulator.py [-h] [--world "world setting"] [--model MODEL] [--api API] [--language LANGUAGE]
@@ -124,7 +124,8 @@ Something more or less important happens on every step, this world never goes st
 Map out and update a JSON of places inside the world and their hierarchies, what's inside what, as well as a short description of notable features. 
 We also put items of characters, their state and their properties inside character's props of world map JSON. It also contains info on character relationships with the protagonist and other important characters.
 Maintain and keep up to date assumed positions of characters and their properties inside the map. Keep clear track of time and remember hour, minute, day of week, day of month, etc.
-Retain memories of quests completed and of promises and compensations not unfulfilled yet.
+Retain memories of quests completed and of promises and compensations not unfulfilled yet. 
+We take note of not just personal characters, an organization, or even a nation can be a character if this is meaningful under provided context.
 Don't forget to list each thing you got to list in JSON.
 At the end we list players past action."""
         
