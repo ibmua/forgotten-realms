@@ -1,13 +1,20 @@
-# pip3 install anthropic termcolor
-# CLAUDE_API_KEY env var also required. https://console.anthropic.com/
-# export CLAUDE_API_KEY="sk-ant-api03-.."
-# usage: world-simulator.py [-h] [--world "world setting"] [--model MODEL] [--api API] [--language LANGUAGE]
+# World simulator to play open-ended DnD-like games in the world of your choice.
 
+# Installation:
+# pip3 install anthropic termcolor
+# CLAUDE_API_KEY env var also required:
+#   get at https://console.anthropic.com/
+# Then set your api key like this in the terminal where you'll run this:
+#   export CLAUDE_API_KEY="sk-ant-api03-.."
+
+# usage: world-simulator.py [-h] [--world "world setting"] [--model MODEL] [--api API] [--language LANGUAGE]
 # options:
 #   -h, --help           show this help message and exit
 #   --model MODEL        Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")
 #   --api API            API to use: "anthropic" or "google" (default: "anthropic")
 #   --language LANGUAGE  Language for the narrator: for example "українська", or "Ukrainian"
+#   --world WORLD        World this is set in. defaults to "Forgotten Realms". Try, for example, "world of Harry Potter", "Ancient Greece", "Ukraine fighting
+#                        Russia. I'm Zelensky", "3 reich during WW2. I am Hitler", etc.
 
 import anthropic
 import argparse
@@ -155,7 +162,7 @@ At the end we list players past action."""
         print("Thanks for playing!")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process files in specified folders.')
+    parser = argparse.ArgumentParser(description='Choose parameters to run the dungeones and dragons-like simulation.')
     parser.add_argument('--model', type=str, help='Anthropic model to use: "sonnet", "opus", or "haiku" (default: "sonnet")', default='sonnet')
     parser.add_argument('--api', type=str, help='API to use: "anthropic" or "google" (default: "anthropic")', default='anthropic')
     parser.add_argument('--language', type=str, help='Language for the narrator: for example "українська", or "Ukrainian"', default='English')
