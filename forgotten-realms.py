@@ -36,7 +36,8 @@ class RPGGame:
     def __init__(self, client, model, language, world):
         self.client = client
         self.model = model
-        self.context = "Chatacter posesses 58 coins and usual folk robes. His skills are yet to be discovered."
+        # self.context = "Character posesses 58 coins and usual folk robes. His skills are yet to be discovered."
+        self.context = "Character posessions and skills are designed based on setting appropriately."
         self.history_message_num = 0
         self.language = language
         self.world = world
