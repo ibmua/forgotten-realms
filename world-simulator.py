@@ -175,7 +175,7 @@ if __name__ == "__main__":
     if args.api == 'anthropic':
         client = anthropic.Anthropic(api_key=api_key)
         if args.model == 'sonnet':
-            model = "claude-3-sonnet-20240229"
+            model = "claude-3-5-sonnet-20240620"
         elif args.model == 'opus':
             model = "claude-3-opus-20240229"
         elif args.model == 'haiku':
